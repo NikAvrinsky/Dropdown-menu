@@ -8,7 +8,7 @@ class Dropdown {
                 this.$el.classList.contains('open') ? this.close() : this.open()
                 
             } else if (event.target.tagName.toLowerCase() === 'li') {
-                this.$el.querySelector('.dropdown__label').textContent = event.target.textContent
+                this.select(event.target.dataset.id)
                 this.close()
             }
         })
@@ -17,6 +17,12 @@ class Dropdown {
         }).join(' ')
         this.$el.querySelector('.dropdown__menu').insertAdjacentHTML('afterbegin', itemsHTML)
     }
+
+    select(id) {
+        const item = this.items.find(i => i.id === id)
+        this.$el.querySelector('.dropdown__label').textContent = item.label
+    }
+
     open() {
         this.$el.classList.add('open')
     }
